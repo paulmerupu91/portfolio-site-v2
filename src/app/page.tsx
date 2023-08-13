@@ -38,7 +38,7 @@ export default function Home() {
 
                 <SectionSpacer></SectionSpacer>
                 <h1 className="col-span-full mt-32 text-4xl md:text-7xl lg:text-8xl text-sky-700 dark:text-sky-600">
-                    Hi, I'm Paul Merupu
+                    {`Hi, I'm Paul Merupu`}
                 </h1>
                 {/* <DottedXAxis></DottedXAxis> */}
                 <p className="col-span-1 md:col-span-2
@@ -47,20 +47,20 @@ export default function Home() {
                 >
                     As a full-stack web developer with over 7 years experience, and having a background in
                     computer science and creative design,
-                    I enjoy building ⚡️fast, 📏scalable, and 💡intuitive web applications.
+                    I enjoy building {`⚡️`}fast, {`📏`}scalable, and {`💡`}intuitive web applications.
                     I believe in continuous learning and often read about modern development tools and architecture.
                 </p>
                 <DottedXAxis></DottedXAxis>
 
                 <SectionSpacer></SectionSpacer>
                 <Heading2>Skills
-                    <span className="text-2xl ms-2">🔧</span>
+                    <span className="text-2xl ms-2">{`🔧`}</span>
                 </Heading2>
                 <Skills></Skills>
 
                 <SectionSpacer></SectionSpacer>
                 <Heading2>Experience
-                    <span className="text-2xl ms-2">🖥️</span>
+                    <span className="text-2xl ms-2">{`🖥️`}</span>
                 </Heading2>
                 <Experience></Experience>
 
@@ -70,13 +70,13 @@ export default function Home() {
 
                 <SectionSpacer></SectionSpacer>
                 <Heading2>Education
-                    <span className="text-2xl ms-2">🎓</span>
+                    <span className="text-2xl ms-2">{`🎓`}</span>
                 </Heading2>
                 <Education></Education>
 
                 <SectionSpacer></SectionSpacer>
                 <Heading2>Hobbies
-                    <span className="text-2xl ms-2">📷</span>
+                    <span className="text-2xl ms-2">{`📷`}</span>
                 </Heading2>
                 <div className="md:col-span-3 flex gap-4 flex-wrap">
                     {['Web Development', 'Photography', 'Guitar', 'Tennis'].map(hobby =>

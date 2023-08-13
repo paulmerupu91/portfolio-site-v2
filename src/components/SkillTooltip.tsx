@@ -71,10 +71,11 @@ function SkillTooltip({ link, skill }: Props) {
 export default SkillTooltip
 
 function SkillInfo({ description, setShow, skill }: { description: string, setShow: CallableFunction, skill: string }) {
+    const elMount = document.querySelector( '.skill-info-mount' );
     return (
         <>
             {
-                createPortal( 
+                elMount && createPortal( 
                     <div className='z-10 h-screen w-screen fixed
 
                         top-0 left-0 flex items-center content-center'
@@ -95,7 +96,7 @@ function SkillInfo({ description, setShow, skill }: { description: string, setSh
                             {description}
                         </div>
                     </div>,
-                    document.querySelector( '.skill-info-mount' )
+                    elMount
                 )
             }
         </>

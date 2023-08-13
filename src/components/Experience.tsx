@@ -63,38 +63,22 @@ function Experience({ }: Props) {
                     const endDateObj = job.endDate ? new Date(job.endDate) : new Date();
                     const years = yearsDiff(startDateObj, endDateObj);
                     return (
-                        <>
-                            <div className={`col-span-3 md:col-span-1`}>
-                                <h4 className='font-bold text-xl text-sky-800 dark:text-sky-600'>
-                                    {job.companyName}
-                                </h4>
-                                <h3 className='text-2xl my-2'>
-                                    {job.title}
-                                </h3>
-                                <div className='my-2'>
-                                    {startDateObj.toLocaleDateString('en-us', { year: "numeric", month: "short" })} - {job.currentJob ? <span>current</span> : endDateObj.toLocaleDateString('en-us', { year: "numeric", month: "short" })}</div>
 
-                                <div>
-                                    {years < 1 ? '<1' : years}  {years > 1 ? `years` : `year`}
-                                </div>
+                        <div key={i} className={`col-span-3 md:col-span-1`}>
+                            <h4 className='font-bold text-xl text-sky-800 dark:text-sky-600'>
+                                {job.companyName}
+                            </h4>
+                            <h3 className='text-2xl my-2'>
+                                {job.title}
+                            </h3>
+                            <div className='my-2'>
+                                {startDateObj.toLocaleDateString('en-us', { year: "numeric", month: "short" })} - {job.currentJob ? <span>current</span> : endDateObj.toLocaleDateString('en-us', { year: "numeric", month: "short" })}</div>
 
-                                {/* <div className="job-description text-xl border border-transparent hover:bg-sky-200 hover:-mx-4 hover:px-4 py-4 hover:border hover:border-slate-300 rounded-2xl">
-                                    <ul>
-                                    {job.description?.map( (des, i) => 
-                                        <li key={i}>
-                                            {des}    
-                                        </li>
-                                    )}
-                                    </ul>
-                                    
-                                </div> */}
-                                {/* <span>{job.}</span> */}
+                            <div>
+                                {years < 1 ? '<1' : years}  {years > 1 ? `years` : `year`}
                             </div>
 
-                            {/* <div className="col-span-full md:col-span-1 col border border-green-400 border-dotted">
-                                
-                            </div> */}
-                        </>
+                        </div>
 
                     )
                 }

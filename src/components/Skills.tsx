@@ -126,7 +126,7 @@ export default function Skills({ skills = skillList }: Props) {
                             {skill.skillName}
                         </h3>
                         <SkillTooltip
-                            link={skill.link}
+                            link={skill.link || ''}
                             skill={skill.skillName}
                         />
                     </div>
