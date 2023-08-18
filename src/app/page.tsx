@@ -48,7 +48,7 @@ export default function Home() {
                     As a full-stack web developer with over 7 years experience, and having a background in
                     computer science and creative design,
                     I enjoy building {`⚡️`}fast, {`📏`}scalable, and {`💡`}intuitive web applications.
-                    I believe in continuous learning and often read about modern development tools and architecture.
+                    I believe in continuous learning and I like to read about modern development tools and architecture.
                 </p>
                 <DottedXAxis></DottedXAxis>
 
