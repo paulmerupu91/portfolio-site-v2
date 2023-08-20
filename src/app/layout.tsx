@@ -45,7 +45,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             
-            <body className={`${hyperLedible.className} text-slate-500 dark:text-slate-200 dark:bg-slate-900 overflow-x-hidden`}>
+            <body className={`${hyperLedible.className} text-slate-600 dark:text-slate-200 dark:bg-slate-900 overflow-x-hidden`}>
                 
                 <Navigation></Navigation>
                 {children}

@@ -9,6 +9,7 @@ import Experience from '@/components/Experience';
 import Script from 'next/script';
 import Education from '@/components/Education';
 import Footer from '@/components/Footer';
+import Projects from '@/components/Projects';
 
 export default function Home() {
     return (
@@ -42,7 +43,7 @@ export default function Home() {
                 </h1>
                 {/* <DottedXAxis></DottedXAxis> */}
                 <p className="col-span-1 md:col-span-2
-                    leading-8 text-xl sm:text-2xl text-blue-200 md:leading-10 md:text-3xl
+                    leading-8 text-xl sm:text-2xl md:leading-10 md:text-3xl
                     mt-5 md:mt-0"
                 >
                     As a full-stack web developer with over 7 years experience, and having a background in
@@ -75,6 +76,12 @@ export default function Home() {
                 <Education></Education>
 
                 <SectionSpacer></SectionSpacer>
+                <Heading2>Projects
+                    <span className="text-2xl ms-2">{`⚙️`}</span>
+                </Heading2>
+                <Projects></Projects>
+
+                <SectionSpacer></SectionSpacer>
                 <Heading2>Hobbies
                     <span className="text-2xl ms-2">{`📷`}</span>
                 </Heading2>
@@ -95,8 +102,6 @@ export default function Home() {
                         </h3>
                     )}
                 </div>
-
-                
 
                 {/* <SectionSpacer></SectionSpacer>
                 <Heading2>Projects
