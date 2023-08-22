@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import Navigation from '@/components/Navigation'
-import Script from 'next/script';
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -44,11 +44,22 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            
             <body className={`${hyperLedible.className} text-slate-600 dark:text-slate-200 dark:bg-slate-900 overflow-x-hidden`}>
                 
                 <Navigation></Navigation>
                 {children}
+                <Script id='gtm-js' strategy='afterInteractive' src='https://www.googletagmanager.com/gtag/js?id=UA-70356318-2'>
+
+                </Script>
+                <Script id='gtm-script' strategy='afterInteractive'>
+                    {`
+                         window.dataLayer = window.dataLayer || [];
+                         function gtag(){dataLayer.push(arguments);}
+                         gtag('js', new Date());
+                       
+                         gtag('config', 'UA-70356318-2');
+                    `}
+                </Script>
                 
             </body>
             
