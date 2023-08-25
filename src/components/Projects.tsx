@@ -14,7 +14,7 @@ const workExp: Job[] = [
     {
         title: 'Chat Room',
         description: <div>A light-weight and performant event-driven chat application build with <CustomLink href="https://react.dev/">React</CustomLink>, <CustomLink href="https://expressjs.com/">Express</CustomLink> and <CustomLink href="https://socket.io/">Socket.IO</CustomLink>.</div>,
-        link: <CustomLink className='text-small' green={true} href='chat-room.paulmerupu.com'>chat-room.paulmerupu.com 🔗</CustomLink>
+        link: <CustomLink className='text-small' green={true} href='https://chat-room.paulmerupu.com'>chat-room.paulmerupu.com 🔗</CustomLink>
     },
     {
         title: 'Taskboard',
