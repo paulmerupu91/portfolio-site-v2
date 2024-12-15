@@ -20,7 +20,7 @@ const workExp: Job[] = [
             `Collaborated with product and engineering teams to strengthen Scrum Agile processes, focusing on reducing technical debt, enhancing tooling, and optimizing planning and communication for greater efficiency and alignment.`
         ],
         currentJob: true,
-        startDate: 'Jan 1 2023',
+        startDate: 'August 16 2024',
         // endDate?: ,
     },
     {
@@ -28,7 +28,7 @@ const workExp: Job[] = [
         companyName: 'Adweek',
         // description: [`Developed CI/CD pipelines for production, QA and development instances in early 2023. Automated coding standards check in the pipeline.
         //     About 300 deployments are successfully executed through the pipelines every month.`],
-        currentJob: true,
+        currentJob: false,
         startDate: 'Jan 1 2023',
         endDate: 'Aug 15 2024',
     },
