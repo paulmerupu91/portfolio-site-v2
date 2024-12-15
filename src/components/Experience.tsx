@@ -13,13 +13,24 @@ type Job = {
 
 const workExp: Job[] = [
     {
+        title: 'Lead Software Engineer',
+        companyName: 'Adweek',
+        description: [
+            `Led and managed the migration of the Adweek site to a new PaaS, successfully transferring over 500,000 content items and 4 million digital assets, resulting in a 70% reduction in hosting costs.`,
+            `Collaborated with product and engineering teams to strengthen Scrum Agile processes, focusing on reducing technical debt, enhancing tooling, and optimizing planning and communication for greater efficiency and alignment.`
+        ],
+        currentJob: true,
+        startDate: 'Jan 1 2023',
+        // endDate?: ,
+    },
+    {
         title: 'Senior Full Stack Developer',
         companyName: 'Adweek',
         // description: [`Developed CI/CD pipelines for production, QA and development instances in early 2023. Automated coding standards check in the pipeline.
         //     About 300 deployments are successfully executed through the pipelines every month.`],
         currentJob: true,
         startDate: 'Jan 1 2023',
-        // endDate?: ,
+        endDate: 'Aug 15 2024',
     },
     {
         title: 'Web Developer',
