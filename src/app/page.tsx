@@ -46,10 +46,7 @@ export default function Home() {
                     leading-8 text-xl sm:text-2xl md:leading-10 md:text-3xl
                     mt-5 md:mt-0"
                 >
-                    As a full-stack web developer with over 7 years experience, and having a background in
-                    computer science and creative design,
-                    I enjoy building {`⚡️`}fast, {`📏`}scalable, and {`💡`}intuitive web applications.
-                    I believe in continuous learning and I like to read about modern development tools and architecture.
+                    I specialize in developing high-performance, scalable, and user-friendly web and mobile applications. With a strong foundation in computer science and a passion for design, I continuously seek to improve my skills by exploring the latest tools and architectures in the software development landscape.
                 </p>
                 <DottedXAxis></DottedXAxis>
 
