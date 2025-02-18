@@ -1,18 +1,31 @@
 'use client'
 import React, { useEffect } from 'react'
+import { setTheme, getTheme } from '@/app/lightAndDarkMode'
+import { get } from 'http'
 
 type Props = {
     svgSize: number
 }
 
+// function toggleThemeLS(){
+//     console.log( 'setting theme' );
+//     if( localStorage.getItem( 'theme' ) === 'dark' ){
+//         localStorage.setItem( 'theme', 'light' );
+//         document.documentElement.classList.remove('dark')
+//     }else{
+//         localStorage.setItem( 'theme', 'dark' );
+//         document.documentElement.classList.add('dark')
+//     }
+// }
+
 function toggleThemeLS(){
-    console.log( 'setting theme' );
-    if( localStorage.getItem( 'theme' ) === 'dark' ){
-        localStorage.setItem( 'theme', 'light' );
-        document.documentElement.classList.remove('dark')
-    }else{
-        localStorage.setItem( 'theme', 'dark' );
-        document.documentElement.classList.add('dark')
+    console.log( 'clicked' );
+    if( getTheme() === 'dark' ){
+        setTheme( 'light' );
+        document.documentElement.classList.remove('dark');
+    } else {
+        setTheme( 'dark' );
+        document.documentElement.classList.add('dark');
     }
 }
 

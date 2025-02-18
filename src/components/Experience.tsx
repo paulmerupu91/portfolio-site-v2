@@ -77,7 +77,10 @@ function Experience({ }: Props) {
 
                         <div key={i} className={`col-span-3 md:col-span-1`}>
                             <h4 className='font-bold text-xl text-sky-800 dark:text-sky-600'>
-                                {job.companyName}
+                                {
+                                    job.companyName === workExp[i - 1]?.companyName ? <>&nbsp;</> : job.companyName
+                                }
+                                {/* {job.companyName} */}
                             </h4>
                             <h3 className='text-2xl my-2'>
                                 {job.title}

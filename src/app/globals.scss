@@ -17,7 +17,7 @@
 }
 
 body {
-  
+    background-color: #e5e5f7;
 }
 
 img{
@@ -26,4 +26,21 @@ img{
 
 .hero-img img{
     width: 100%;
+    margin: unset;
+}
+
+.article-body{
+
+    img{
+        @apply w-full; 
+    }
+
+    p{
+        @apply px-6;
+        @apply py-4;
+    }
+
+    code{
+        // @apply -mx-8;
+    }
 }

@@ -4,14 +4,24 @@ import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import Navigation from '@/components/Navigation'
 import Script from 'next/script'
+import Footer from '@/components/Footer'
+import { cookies } from 'next/headers'
+import AnimatedDiv from '@/components/AnimatedDiv';
+import { usePathname } from 'next/navigation';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
+
+
+// let darkMode = false;
+// if( window.matchMedia('(prefers-color-scheme: dark)').matches) {
+//     darkMode = true;
+// }
 
 const questrial = localFont({
     src: './../fonts/Questrial-Regular.otf',
     display: 'swap',
 })
-const hyperLedible = localFont({
+const hyperLegible = localFont({
     display: 'swap',
     src: [
         {
@@ -26,7 +36,7 @@ const hyperLedible = localFont({
         }
     ]
 })
-const hyperLedibleBold = localFont({
+const hyperLegibleBold = localFont({
     src: './../fonts/Atkinson-Hyperlegible-Bold-102.otf',
     display: 'swap',
     weight: '700'
@@ -34,20 +44,32 @@ const hyperLedibleBold = localFont({
 
 export const metadata: Metadata = {
     title: 'Paul Merupu',
-    description: 'Full stack engineer with over 7 years of experience building performant and modern web applications.',
+    description: 'Full stack engineer with over 8 years of experience building performant and modern web applications.',
 }
 
-export default function RootLayout({
+const bgClassNames = 'bg-white dark:bg-slate-900'
+
+export default async function RootLayout({
     children,
 }: {
     children: React.ReactNode
 }) {
+
+    const cookieStore = await cookies();
+    const theme = cookieStore.get('theme')?.value || 'light';
+    console.log( 'theme', theme );
     return (
-        <html lang="en">
-            <body className={`${hyperLedible.className} text-slate-600 dark:text-slate-200 dark:bg-slate-900 overflow-x-hidden`}>
-                
+        <html lang="en" className={`h-full ${theme}`}>
+            <body className={`${hyperLegible.className} ${bgClassNames} h-full flex flex-col text-slate-600 dark:text-slate-200 ${bgClassNames} overflow-x-hidden z-0`}>
+
                 <Navigation></Navigation>
-                {children}
+                <div id="content-wrapper" className={`${bgClassNames} flex-grow border-b border-b-slate-300 dark:border-b-slate-700 `}>
+                    <AnimatedDiv>
+                        {children}
+                    </AnimatedDiv>
+
+                </div>
+
                 <Script id='gtm-js' strategy='afterInteractive' src='https://www.googletagmanager.com/gtag/js?id=UA-70356318-2'>
 
                 </Script>
@@ -60,9 +82,23 @@ export default function RootLayout({
                          gtag('config', 'UA-70356318-2');
                     `}
                 </Script>
-                
+
+                <Footer />
+
+                {/* <Script id="init-theme"
+                    // src="./darkModeInit.js"
+                    strategy='beforeInteractive'
+                >
+                    {`
+                        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                            document.documentElement.classList.add('dark')
+                        } else {
+                            document.documentElement.classList.remove('dark')
+                        }
+                    `}
+                </Script> */}
             </body>
-            
+
         </html>
     )
 }

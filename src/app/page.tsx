@@ -15,8 +15,8 @@ export default function Home() {
     return (
         <>
             {/* <BoxObject></BoxObject> */}
-            <div className="flex flex-row align-center justify-center ">
-                <div className="absolute w-full -z-10 h-screen
+            <div className=" flex flex-row align-center justify-center relative">
+                <div className="absolute w-full z-0 h-screen
                     grid
                     gap-8 xl:gap-12 grid-cols-3 flex-col px-6 lg:px-12 bottom-[10px] top-[-10px]
                     xl:container mx-auto
@@ -35,7 +35,7 @@ export default function Home() {
 
                 </div>
             </div>
-            <main className="flex gap-8 md:grid auto-rows-min xl:gap-12 md:grid-cols-3 flex-col p-6 lg:p-12 xl:container mx-auto overflow-x-hidden">
+            <main className=" home-container relative flex gap-8 md:grid auto-rows-min xl:gap-12 md:grid-cols-3 flex-col p-6 lg:p-12 xl:container mx-auto overflow-x-hidden z-[1]">
 
                 <SectionSpacer></SectionSpacer>
                 <h1 className="col-span-full mt-32 text-4xl md:text-7xl lg:text-8xl text-sky-700 dark:text-sky-600">
@@ -113,27 +113,16 @@ export default function Home() {
 
                 <SectionSpacer></SectionSpacer>
 
-                <Footer/>
+                
 
             </main>
             <Script id="extend-bg">
                 {`
-                document.querySelector( '.bg-grid' ).style.height = document.documentElement.scrollHeight + 'px';
+                document.querySelector( '.bg-grid' ).style.height = document.querySelector( '.home-container' ).scrollHeight + 'px';
                 
                 `}
             </Script>
-            <Script id="init-theme"
-                // src="./darkModeInit.js"
-                strategy='afterInteractive'
-            >
-                {`
-                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                    document.documentElement.classList.add('dark')
-                } else {
-                    document.documentElement.classList.remove('dark')
-                }
-                `}
-            </Script>
+            
         </>
     )
 }
