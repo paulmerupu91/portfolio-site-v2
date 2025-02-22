@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@apollo/client": "^3.13.1",
     "@react-spring/web": "^9.7.5",
     "@types/node": "20.4.9",
     "@types/react": "18.2.20",
@@ -17,6 +16,8 @@
     "autoprefixer": "10.4.14",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.13",
+    "graphql": "^16.10.0",
+    "graphql-request": "^7.1.2",
     "highlight.js": "^11.11.1",
     "next": "13.4.13",
     "postcss": "8.4.27",
