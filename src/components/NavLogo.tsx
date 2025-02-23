@@ -29,10 +29,7 @@ function NavLogo(): JSX.Element {
         >
             {logoTextArr.map((letter, index) => {
                 return (
-                    <>
-                        <SingleChar key={index} letter={letter} index={index} hovered={hovered} />
-                        {/* <span key={index} className=''>{letter}</span> */}
-                    </>
+                    <SingleChar key={`single_char_${index}_${letter}`} letter={letter} index={index} hovered={hovered} />
                 )
             })}
         </div>
@@ -90,7 +87,7 @@ const SingleChar = ({ letter, index, hovered = false }: { letter: string, index:
         }, randomTimeoutTime + 2000)
         return () => clearTimeout(timeout)
 
-    }, [init, hovered])
+    }, [init, hovered, api])
     
     return (
         <animated.span

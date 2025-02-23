@@ -35,7 +35,7 @@ function AnimatedDiv({ children }: Props): JSX.Element {
 
     useEffect(() => {
         transRef.start()
-    }, [pathname])
+    }, [pathname, transRef])
 
     return (
         <>

@@ -135,9 +135,9 @@ const RecentPosts = ({ recentPosts } : {recentPosts: array}) => {
         <div className="recent-posts">
             <h2 className='text-sky-700 dark:text-sky-600 text-2xl font-light leading-4 mb-6'>Recent Posts</h2>
             <ul>
-                {recentPosts?.map?.(({ node: post }) =>
+                {recentPosts?.map?.(({ node: post }, index : number) =>
 
-                    <li >
+                    <li key={`recent-post-${index}`}>
                         <Link href={`/blog/${post.slug}`} className=' text-gray-500 hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-300 block mb-2 '>{post.title}</Link>
                     </li>
                 )}
