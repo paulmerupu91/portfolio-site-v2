@@ -22,7 +22,6 @@ function AnimatedDiv({ children }: Props): JSX.Element {
     // Use transitions to animate the component when the route changes
     // const [key, setKey] = useState(0); // State to track page transitions
     const pathname = usePathname() // Hook from React Router to get the current route
-    console.log('pathname', pathname);
     const [index, set] = useState(0);
 
     const transRef = useSpringRef();
@@ -37,28 +36,6 @@ function AnimatedDiv({ children }: Props): JSX.Element {
     useEffect(() => {
         transRef.start()
     }, [pathname])
-
-    // useEffect(() => {
-    //     setKey((prevKey) => {
-    //         console.log('prevKey', prevKey);
-    //         return prevKey + 1
-    //     }); // Trigger animation on route change
-    // }, [pathname]);
-
-    // const [transitions, api] = useTransition([children], () => ({
-    //     from: { opacity: 1, y: 20 },
-    //     to: { opacity: 1, y: 0 },
-    //     enter: { opacity: 1, y: 0 },
-    //     leave: { opacity: 0, y: -20 },
-    //     config: { duration: 300, exitBeforeEnter: true },
-
-    // }));
-
-    // const transitions = useTransition(data, {
-    //     from: { opacity: 0 },
-    //     enter: { opacity: 1 },
-    //     leave: { opacity: 1 },
-    // });
 
     return (
         <>

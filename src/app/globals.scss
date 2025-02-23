@@ -35,7 +35,7 @@ img{
         @apply w-full; 
     }
 
-    p{
+    p, ol, ul{
         @apply px-6;
         @apply py-4;
     }
@@ -43,4 +43,20 @@ img{
     code{
         // @apply -mx-8;
     }
+
+    h1, h2, h3, h4, h5, h6{
+        @apply font-bold;
+        @apply px-6;
+    }
 }
+
+// Write different styles for class bg-pattern for dark and light modes
+
+.bg-pattern{
+    opacity: 0.8;
+    background-image: radial-gradient(#0072ab 0.5px, #0b0b1900 0.5px);
+    background-blend-mode: overlay;
+    background-size: 10px 10px;
+    
+}
+

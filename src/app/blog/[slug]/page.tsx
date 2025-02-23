@@ -1,61 +1,58 @@
 import React from 'react'
 import { redirect } from 'next/navigation'
-import { formatWpDateString, getBlogPostsFromApi } from '@/utils/index'
+import { formatWpDateString, getBlogPostsFromApi, getBlogPostFromApi } from '@/utils/index'
 import Link from 'next/link'
 import CodeHighlighter from '@/components/CodeHighlighter'
+import readingTime from 'reading-time'
 
 async function index({ params }: { params: Promise<{ slug: string }> }): Promise<JSX.Element> {
 
     // Dynamic route path in Next.js
-    let postData = null;
+
     const slug = (await params).slug;
+    let postResGraphQL = null
     try {
-        const postDataPromise = await fetch(`https://blog-cms.paulmerupu.com/wp-json/wp/v2/posts?slug=${slug}`, {
-            method: 'GET',
-            headers: {
-                'Cache-Control': 'no-store', // Prevents caching
-                Pragma: 'no-cache',          // HTTP/1.0 compatibility
-            }
-        })
-        postData = await postDataPromise.json();
-        if (postData?.[0]?.featured_media) {
-            const featuredMediaPromise = await fetch(`https://blog-cms.paulmerupu.com/wp-json/wp/v2/media/${postData[0].featured_media}`, {
-                method: 'GET',
-                headers: {
-                    'Cache-Control': 'no-store', // Prevents caching
-                    Pragma: 'no-cache',          // HTTP/1.0 compatibility
-                }
-            })
-            const featuredMediaData = await featuredMediaPromise.json();
-            // console.log( 'featuredMediaData', featuredMediaData );
-            postData[0].featured_media_data = featuredMediaData;
-        }
-        // console.log('postData from single blog post page', postData);
+        const resPost = await getBlogPostFromApi({ slug: slug });
+        postResGraphQL = resPost?.post || null;
 
     } catch (error) {
         console.error(error);
-        return redirect('/404')
     }
-    // console.log( 'postData', postData );
 
     // if postData is null, redirect NextJS app to 404
-    if (!postData || postData.length === 0) {
+    if (!postResGraphQL || postResGraphQL.post === 0) {
         return redirect('/404')
     }
 
-    const date = formatWpDateString(postData[0].date);
+    const date = formatWpDateString(postResGraphQL?.date);
 
     let recentPosts = null;
-    try{
-        recentPosts = await getBlogPostsFromApi();
-        recentPosts = recentPosts.filter( post => post.slug !== slug );
+    try {
+        const recentPostsRes = await getBlogPostsFromApi();
+
+        const recentAllPosts = recentPostsRes?.posts?.edges || [];
+
+        recentPosts = recentAllPosts.filter(edge => edge?.node?.slug !== slug);
     } catch (error) {
         console.error(error);
     }
 
     const negativeMarginTitleAndHero = `md:-ms-40`;
-    const paddingClasses = `lg:ps-8 xl:ps-12`
-    const postContent = postData[0].content.rendered || '';
+    const paddingClasses = `py-12`
+    const postContent = postResGraphQL.content || '';
+    
+    // Reading time
+    let readingTimeStr : (string|null) = null;
+    try{
+
+        const readingTimeInfo = readingTime( postContent );
+        if( readingTimeInfo?.text ){
+            readingTimeStr = readingTimeInfo.text;
+        }
+
+    } catch (error) {
+        console.error('Reading time error', error);
+    }
 
     let hasCodeBlock = false;
     if (postContent.includes('<code')) {
@@ -63,50 +60,61 @@ async function index({ params }: { params: Promise<{ slug: string }> }): Promise
     }
 
     return (
-        <div className='my-28'>
+        <div className='my-16 md:my-28 overflow-x-hidden'>
 
 
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-6 p-6 md:p-0">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-x-6 lg:gap-x-6 p-6 md:p-0">
 
                 {/* <div className=" border-e border-e-slate-200 dark:border-slate-700"> */}
-                
-                <div className={`md:col-start-4 md:col-span-6 ${negativeMarginTitleAndHero} ${paddingClasses}`}>
-                    <h1 className={`text-3xl md:text-4xl xl:text-5xl font-extralight`}>
+
+                <div className={`md:col-start-4 md:col-span-6 ${negativeMarginTitleAndHero} ${paddingClasses} relative`}>
+
+                    {/* Pattern */}
+                    <div className="absolute w-full bg-pattern top-0 h-full scale-x-125">
+                        {/* Nothing goes here */}
+                    </div>
+
+                    <h1 className={`text-3xl md:text-4xl xl:text-5xl font-extralight z-10 relative text-slate-800 dark:text-slate-300`}>
                         {/* Post Title */}
-                        {postData && postData[0].title.rendered}
+                        {postResGraphQL && postResGraphQL.title}
                     </h1>
                     {/* Post Date */}
-                    <time className=' text-slate-700 dark:text-slate-400 mt-2 block ' dateTime={postData[0].date}>{date}</time>
-                    
+                    <div className=" inline-flex items-baseline z-10 relative">
+                        <time className=' text-slate-700 dark:text-slate-400 mt-3 block ' dateTime={postResGraphQL.date}>{date}</time>
+                        {
+                            readingTimeStr &&
+                            <>
+                                <span className=' mx-4'>|</span> <span className='text-slate-700 dark:text-slate-400 mt-3 block '>{readingTimeStr}</span>
+                            </>
+                        }
+                    </div>
+
                 </div>
                 <div className='md:col-span-3'></div>
 
                 {/* Second Level (Row) */}
                 <div></div>
-                <div className={`md:col-span-6 md:col-start-4 ${paddingClasses}`}>
+                <div className={`md:col-span-6 md:col-start-4 `}>
                     {
-                        postData && postData[0].featured_media_data &&
-                        <div className={`hero-img mb-12 sm:mx-0 ${negativeMarginTitleAndHero}`} dangerouslySetInnerHTML={{ __html: postData[0].featured_media_data.description.rendered }}></div>
+                        postResGraphQL && postResGraphQL?.featuredImage &&
+                        <div className={`hero-img  sm:mx-0 ${negativeMarginTitleAndHero}`}>
+                            <img
+                                src={postResGraphQL?.featuredImage?.node.sourceUrl}
+                                srcSet={postResGraphQL?.featuredImage?.node.srcSet}
+                                alt={postResGraphQL?.featuredImage?.node.altText}
+                                className='w-full object-cover'
+                            />
+                        </div>
                     }
-                    <div className='article-body text-lg mt-4 sm:px-6 md:px-0 max-w-prose m-auto'>
+                    <div className='article-body text-lg mt-12 sm:px-6 md:px-0 max-w-prose m-auto'>
                         {/* Post Content */}
                         <div dangerouslySetInnerHTML={{ __html: postContent }}></div>
                     </div>
                 </div>
-                <aside className="sidebar-right md:col-span-3 md:me-6 border-t pt-6 md:pt-0 md:border-none">
+                <aside className="sidebar-right md:col-span-3 md:me-6 border-t border-slate-400 dark:border-slate-600 pt-6 md:pt-6 mt-6 md:mt-0 md:border-none">
                     {
                         recentPosts && recentPosts?.length > 0 &&
-                        <div className="recent-posts">
-                            <h2 className='text-sky-700 dark:text-sky-600 text-2xl font-light leading-4 mb-6'>Recent Posts</h2>
-                            <ul>
-                                {recentPosts?.map?.( post =>
-
-                                    <li >
-                                        <Link href={`/blog/${post.slug}`} className=' text-gray-800 dark:text-slate-300 block mb-2 '>{post.title.rendered}</Link>
-                                    </li>
-                                ) }
-                            </ul>
-                        </div>
+                        <RecentPosts recentPosts={recentPosts}></RecentPosts>
                     }
                 </aside>
             </div>
@@ -121,3 +129,19 @@ async function index({ params }: { params: Promise<{ slug: string }> }): Promise
 }
 
 export default index
+
+const RecentPosts = ({ recentPosts } : {recentPosts: array}) => {
+    return (
+        <div className="recent-posts">
+            <h2 className='text-sky-700 dark:text-sky-600 text-2xl font-light leading-4 mb-6'>Recent Posts</h2>
+            <ul>
+                {recentPosts?.map?.(({ node: post }) =>
+
+                    <li >
+                        <Link href={`/blog/${post.slug}`} className=' text-gray-500 hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-300 block mb-2 '>{post.title}</Link>
+                    </li>
+                )}
+            </ul>
+        </div>
+    )
+}

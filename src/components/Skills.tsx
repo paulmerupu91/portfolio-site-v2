@@ -112,23 +112,19 @@ export default function Skills({ skills = skillList }: Props) {
             {
                 skills.map(skill =>
                     <div key={skill.skillName} data-skill={skill.skillName}>
+                        
                         <h3
                             className={`rounded-full bg-white dark:bg-slate-900 inline-block border
                                 border-green-400 px-4 py-2 md:px-7 md:py-4
-                                hover:bg-green-400 hover:text-white
                                 dark:border-green-700
                                 dark:hover:bg-green-700
                                 trigger
-                                cursor-pointer
                             `}
                         
                         >
                             {skill.skillName}
                         </h3>
-                        <SkillTooltip
-                            link={skill.link || ''}
-                            skill={skill.skillName}
-                        />
+                        
                     </div>
                 )
             }

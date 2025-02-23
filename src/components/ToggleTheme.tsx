@@ -19,7 +19,7 @@ type Props = {
 // }
 
 function toggleThemeLS(){
-    console.log( 'clicked' );
+
     if( getTheme() === 'dark' ){
         setTheme( 'light' );
         document.documentElement.classList.remove('dark');
@@ -33,7 +33,8 @@ function ToggleTheme({ svgSize = 21 }: Props) {
 
     return (
         <div className='toggle-theme relative text-lg mr-1 dark:text-sky-500
-                hover:text-sky-500 dark:hover:text-sky-300 cursor-pointer'
+                hover:text-sky-500 dark:hover:text-sky-300 cursor-pointer
+                hover:rotate-90 transition-transform duration-300'
 
         >
             <div className='absolute bg-sky-200 top-[50%] left-[50%]

@@ -20,10 +20,8 @@ function CodeHighlighter() {
 
         hljs.registerLanguage('javascript', javascript);
 
-        console.log( 'typeof hljs', typeof hljs );
         const handleLoad = () => {
 
-            console.log( 'handleLoad' );
             document.querySelectorAll('pre code').forEach((block) => {
                 hljs.highlightElement(block);
             });

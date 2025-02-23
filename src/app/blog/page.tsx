@@ -6,15 +6,13 @@ import { getBlogPostsFromApi } from '@/utils/index'
 async function page(  ): Promise<JSX.Element> {
 
     const blogPostsRes = await getBlogPostsFromApi();
-
     const blogPosts = blogPostsRes?.posts?.edges || [];
-    console.log('blogposts', blogPosts);
-    // const blogPosts = getBlogPostsFromApi( )
+    const borderClasses = `sm:border-b sm:border-slate-200  dark:border-slate-700 `;
 
     return (
-        <div className=' grid md:grid-cols-3 auto-rows-min gap-12 flex-col p-6 lg:p-12 xl:container mx-auto overflow-x-hidden mt-28'>
-            <div>
-                <h1 className=' text-3xl row-span-3 sticky top-0'>Blog</h1>
+        <div className=' grid sm:grid-cols-2 lg:grid-cols-3 auto-rows-min gap-12 flex-col p-6 lg:p-12 xl:container mx-auto overflow-x-hidden mt-28'>
+            <div className={`bg-pattern flex sm:items-center sm:justify-center ${borderClasses}`}>
+                <h1 className=' text-3xl row-span-3 sticky top-0 py-8 sm:py-0'>Blog</h1>
             </div>
             {
                 blogPosts?.map?.((edge: any) => {
@@ -29,28 +27,24 @@ async function page(  ): Promise<JSX.Element> {
                     } = post;
 
                     const localTimeStr = new Date(date).toLocaleString();
-                    console.log( 'featuredImage', featuredImage );
                     const { srcSet: srcSetFI = null, sourceUrl: sourceUrlFI = null } = featuredImage?.node || {};
-                    console.log( 'featuredImage.node', featuredImage?.node );
-                    console.log( 'srcSetFI', srcSetFI );
-                    console.log( 'sourceUrlFI', sourceUrlFI );
                     const excerptTrimmed = trimHtml(excerpt, 100);
+                    const paddingTopClass = !featuredImage ? 'pt-6' : '';
 
                     return (
-                        <Link key={post.id} href={`/blog/${slug}`} className='pb-6 border-b border-slate-200  dark:border-slate-700 dark:hover:bg-slate-900'>
+                        <Link key={post.id} href={`/blog/${slug}`} className={`flex flex-col content-center justify-center flex-wrap pb-6 ${paddingTopClass} ${borderClasses} `}>
                             {/* Post Image */}
                             {/* <img src={post.featured_media_data?.source_url} alt={post.title.rendered} className='w-full h-48 object-cover' /> */}
                             {/* Post Title */}
-                            <div className="top-section mb-6">
-
-                                {/* Article Featured Image */}
-                                {
-                                    featuredImage &&
+                            {/* Article Featured Image */}
+                            {
+                                featuredImage &&
+                                <div className="top-section mb-6 overflow-hidden">
                                     <div className='hero-img sm:mx-0'>
-                                        <img src={sourceUrlFI} alt={title} className='w-full aspect-3/2 object-cover' />
+                                        <img src={sourceUrlFI} alt={title} className='w-full aspect-3/2 object-cover transition-transform duration-300 ease-out hover:scale-105' />
                                     </div>
-                                }
-                            </div>
+                                </div>
+                            }
                             <div className="bottom-section ">
                                 <h2 className=' text-sky-700 mb-3 font-light text-2xl'>{title}</h2>
                                 <div dangerouslySetInnerHTML={{ __html: excerptTrimmed }}></div>

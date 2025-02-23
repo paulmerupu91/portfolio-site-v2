@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     description: 'Full stack engineer with over 8 years of experience building performant and modern web applications.',
 }
 
-const bgClassNames = 'bg-white dark:bg-slate-900'
+const bgClassNames = 'bg-slate-100 dark:bg-slate-900'
 
 export default async function RootLayout({
     children,
@@ -57,7 +57,7 @@ export default async function RootLayout({
 
     const cookieStore = await cookies();
     const theme = cookieStore.get('theme')?.value || 'light';
-    console.log( 'theme', theme );
+
     return (
         <html lang="en" className={`h-full ${theme}`}>
             <body className={`${hyperLegible.className} ${bgClassNames} h-full flex flex-col text-slate-600 dark:text-slate-200 ${bgClassNames} overflow-x-hidden z-0`}>
