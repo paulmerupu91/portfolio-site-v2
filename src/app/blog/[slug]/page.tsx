@@ -131,7 +131,7 @@ async function index({ params }: { params: Promise<{ slug: string }> }): Promise
 
 export default index
 
-const RecentPosts = ({ recentPosts } : {recentPosts: array}) => {
+const RecentPosts = ({ recentPosts } : {recentPosts: Array<any>}) => {
     return (
         <div className="recent-posts">
             <h2 className='text-sky-700 dark:text-sky-600 text-2xl font-light leading-4 mb-6'>Recent Posts</h2>
