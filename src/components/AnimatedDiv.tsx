@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, type JSX } from 'react';
 import { useSpring, useTransition, animated, useSpringRef } from '@react-spring/web';
 import { usePathname } from 'next/navigation'
 

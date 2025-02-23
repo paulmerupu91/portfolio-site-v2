@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import Link from 'next/link'
 
 import { getBlogPostsFromApi } from '@/utils/index'
@@ -32,7 +31,7 @@ async function page(  ): Promise<JSX.Element> {
                     const paddingTopClass = !featuredImage ? 'pt-6' : '';
 
                     return (
-                        <Link key={post.id} href={`/blog/${slug}`} className={`flex flex-col content-center justify-center flex-wrap pb-6 ${paddingTopClass} ${borderClasses} `}>
+                        <Link key={post.databaseId} href={`/blog/${slug}`} className={`flex flex-col justify-center flex-wrap pb-6 ${paddingTopClass} ${borderClasses} `}>
                             {/* Post Image */}
                             {/* <img src={post.featured_media_data?.source_url} alt={post.title.rendered} className='w-full h-48 object-cover' /> */}
                             {/* Post Title */}
@@ -41,7 +40,7 @@ async function page(  ): Promise<JSX.Element> {
                                 featuredImage &&
                                 <div className="top-section mb-6 overflow-hidden">
                                     <div className='hero-img sm:mx-0'>
-                                        <img src={sourceUrlFI} alt={title} className='w-full aspect-3/2 object-cover transition-transform duration-300 ease-out hover:scale-105' />
+                                        <img srcSet={srcSetFI} src={sourceUrlFI} alt={title} className='w-full aspect-3/2 object-cover transition-transform duration-300 ease-out hover:scale-105' />
                                     </div>
                                 </div>
                             }

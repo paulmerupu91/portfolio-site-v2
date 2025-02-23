@@ -7,20 +7,7 @@ import Script from 'next/script'
 import Footer from '@/components/Footer'
 import { cookies } from 'next/headers'
 import AnimatedDiv from '@/components/AnimatedDiv';
-import { usePathname } from 'next/navigation';
 
-const inter = Inter({ subsets: ['latin'] });
-
-
-// let darkMode = false;
-// if( window.matchMedia('(prefers-color-scheme: dark)').matches) {
-//     darkMode = true;
-// }
-
-const questrial = localFont({
-    src: './../fonts/Questrial-Regular.otf',
-    display: 'swap',
-})
 const hyperLegible = localFont({
     display: 'swap',
     src: [
@@ -44,7 +31,7 @@ const hyperLegibleBold = localFont({
 
 export const metadata: Metadata = {
     title: 'Paul Merupu',
-    description: 'Full stack engineer with over 8 years of experience building performant and modern web applications.',
+    description: 'Full stack engineer with over 8 years of experience building performant and modern web applications.'
 }
 
 const bgClassNames = 'bg-slate-100 dark:bg-slate-900'

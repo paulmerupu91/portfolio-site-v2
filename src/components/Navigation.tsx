@@ -1,19 +1,15 @@
-'use client'
+"use client"
 
 import React, { ReactElement, useEffect, useState } from 'react'
 import ToggleTheme from './ToggleTheme';
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useSpring, animated } from '@react-spring/web'
-import { title } from 'process';
 import NavLogo from './NavLogo';
 
-type Props = {
-    path: string
-}
 const horizontalInnerPaddingAndMargin = 'px-0  '
 
-function Navigation({ }: Props) {
+function Navigation() {
 
     const svgSize = 21;
     const pathName = usePathname();
@@ -148,7 +144,7 @@ export default Navigation
 type LinkExtProps = {
     target?: string,
     href: string,
-    children: ReactElement | string | number
+    children: ReactElement<any> | string | number
 }
 
 function LinkExt({ target = "_blank", href, children }: LinkExtProps) {

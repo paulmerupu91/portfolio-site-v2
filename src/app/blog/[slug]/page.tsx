@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { type JSX } from 'react';
 import { redirect } from 'next/navigation'
 import { formatWpDateString, getBlogPostsFromApi, getBlogPostFromApi } from '@/utils/index'
 import Link from 'next/link'

@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import React, {useState, useRef, useEffect} from 'react'
+import React, { useState, useRef, useEffect, type JSX } from 'react';
 import { useSpring, animated } from '@react-spring/web'
 
 function NavLogo(): JSX.Element {
