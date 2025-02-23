@@ -29,10 +29,11 @@ async function index({ params }: { params: Promise<{ slug: string }> }): Promise
     let recentPosts = null;
     try {
         const recentPostsRes = await getBlogPostsFromApi();
-
         const recentAllPosts = recentPostsRes?.posts?.edges || [];
 
-        recentPosts = recentAllPosts.filter(edge => edge?.node?.slug !== slug);
+        if( recentAllPosts.length > 0 ){
+            recentPosts = recentAllPosts?.filter?.((edge: any) => edge?.node?.slug !== slug);
+        }
     } catch (error) {
         console.error(error);
     }
