@@ -146,3 +146,5 @@ const RecentPosts = ({ recentPosts } : {recentPosts: Array<any>}) => {
         </div>
     )
 }
+
+export const revalidate = 3600

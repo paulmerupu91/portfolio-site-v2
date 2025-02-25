@@ -73,3 +73,5 @@ function trimHtml(html: string, maxChars: number, elipsis = true): string {
     }
     return trimmed;
 }
+
+export const revalidate = 3600
