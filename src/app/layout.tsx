@@ -5,6 +5,7 @@ import localFont from 'next/font/local'
 import Navigation from '@/components/Navigation'
 import Script from 'next/script'
 import Footer from '@/components/Footer'
+import GATracker from '@/components/GATracker'
 import { cookies } from 'next/headers'
 import AnimatedDiv from '@/components/AnimatedDiv';
 
@@ -51,9 +52,12 @@ export default async function RootLayout({
 
                 <Navigation></Navigation>
                 <div id="content-wrapper" className={`${bgClassNames} flex-grow border-b border-b-slate-300 dark:border-b-slate-700 `}>
-                    <AnimatedDiv>
-                        {children}
-                    </AnimatedDiv>
+                    <GATracker>
+                        <AnimatedDiv>
+                            {children}
+                        </AnimatedDiv>
+                    </GATracker>
+
 
                 </div>
 
@@ -71,6 +75,8 @@ export default async function RootLayout({
                 </Script>
 
                 <Footer />
+
+
 
                 {/* <Script id="init-theme"
                     // src="./darkModeInit.js"

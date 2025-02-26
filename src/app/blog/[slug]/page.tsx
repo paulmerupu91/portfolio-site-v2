@@ -4,6 +4,53 @@ import { formatWpDateString, getBlogPostsFromApi, getBlogPostFromApi } from '@/u
 import Link from 'next/link'
 import CodeHighlighter from '@/components/CodeHighlighter'
 import readingTime from 'reading-time'
+import type { Metadata, ResolvingMetadata } from 'next'
+import { parseFromString } from 'dom-parser';
+
+type Props = {
+    params: { slug: string }
+    searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export async function generateMetadata(
+    { params, searchParams }: Props,
+    parent: ResolvingMetadata
+): Promise<Metadata> {
+    // read route params
+    const slug = params.slug
+
+    try {
+        const resPost = await getBlogPostFromApi({ slug: slug });
+        const postResGraphQL = resPost?.post || null;
+        // Getting DOM model
+        const excerptDom = parseFromString(postResGraphQL.excerpt);
+        const excerptPTag = excerptDom.getElementsByTagName('p')?.[0] || null;
+        let excerptText = '';
+        if( excerptPTag && excerptPTag.firstChild ){
+            excerptText = excerptPTag.firstChild.textContent || '';
+        } else {
+            excerptText = postResGraphQL.excerpt;
+        }
+
+
+        return {
+            title: postResGraphQL.title,
+            description: excerptText,
+            openGraph: {
+                images: [postResGraphQL.featuredImage?.node.sourceUrl]
+            }
+        }
+
+    } catch (error) {
+        console.error(error);
+        return {
+            title: 'Blog Post',
+            description: 'Blog Post'
+        }
+    }
+
+
+}
 
 async function index({ params }: { params: Promise<{ slug: string }> }): Promise<JSX.Element> {
 
@@ -31,7 +78,7 @@ async function index({ params }: { params: Promise<{ slug: string }> }): Promise
         const recentPostsRes = await getBlogPostsFromApi();
         const recentAllPosts = recentPostsRes?.posts?.edges || [];
 
-        if( recentAllPosts.length > 0 ){
+        if (recentAllPosts.length > 0) {
             recentPosts = recentAllPosts?.filter?.((edge: any) => edge?.node?.slug !== slug);
         }
     } catch (error) {
@@ -41,13 +88,13 @@ async function index({ params }: { params: Promise<{ slug: string }> }): Promise
     const negativeMarginTitleAndHero = `md:-ms-40`;
     const paddingClasses = `py-12`
     const postContent = postResGraphQL.content || '';
-    
-    // Reading time
-    let readingTimeStr : (string|null) = null;
-    try{
 
-        const readingTimeInfo = readingTime( postContent );
-        if( readingTimeInfo?.text ){
+    // Reading time
+    let readingTimeStr: (string | null) = null;
+    try {
+
+        const readingTimeInfo = readingTime(postContent);
+        if (readingTimeInfo?.text) {
             readingTimeStr = readingTimeInfo.text;
         }
 
@@ -80,12 +127,12 @@ async function index({ params }: { params: Promise<{ slug: string }> }): Promise
                         {postResGraphQL && postResGraphQL.title}
                     </h1>
                     {/* Post Date */}
-                    <div className=" inline-flex items-baseline z-10 relative">
-                        <time className=' text-slate-700 dark:text-slate-400 mt-3 block ' dateTime={postResGraphQL.date}>{date}</time>
+                    <div className=" inline-flex flex-wrap items-baseline z-10 relative mt-3 text-slate-700 dark:text-slate-400">
+                        <time className='  block ' dateTime={postResGraphQL.date}>{date}</time>
                         {
                             readingTimeStr &&
                             <>
-                                <span className=' mx-4'>|</span> <span className='text-slate-700 dark:text-slate-400 mt-3 block '>{readingTimeStr}</span>
+                                <span className='mx-3 sm:mx-4'>|</span> <span className=' block '>{readingTimeStr}</span>
                             </>
                         }
                     </div>
@@ -98,7 +145,7 @@ async function index({ params }: { params: Promise<{ slug: string }> }): Promise
                 <div className={`md:col-span-6 md:col-start-4 `}>
                     {
                         postResGraphQL && postResGraphQL?.featuredImage &&
-                        <div className={`hero-img  sm:mx-0 ${negativeMarginTitleAndHero}`}>
+                        <div className={`hero-img -mx-6 sm:mx-0 md:-me-0 ${negativeMarginTitleAndHero}`}>
                             <img
                                 src={postResGraphQL?.featuredImage?.node.sourceUrl}
                                 srcSet={postResGraphQL?.featuredImage?.node.srcSet}
@@ -131,12 +178,12 @@ async function index({ params }: { params: Promise<{ slug: string }> }): Promise
 
 export default index
 
-const RecentPosts = ({ recentPosts } : {recentPosts: Array<any>}) => {
+const RecentPosts = ({ recentPosts }: { recentPosts: Array<any> }) => {
     return (
         <div className="recent-posts">
             <h2 className='text-sky-700 dark:text-sky-600 text-2xl font-light leading-4 mb-6'>Recent Posts</h2>
             <ul>
-                {recentPosts?.map?.(({ node: post }, index : number) =>
+                {recentPosts?.map?.(({ node: post }, index: number) =>
 
                     <li key={`recent-post-${index}`}>
                         <Link href={`/blog/${post.slug}`} className=' text-gray-500 hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-300 block mb-2 '>{post.title}</Link>
