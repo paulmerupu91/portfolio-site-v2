@@ -32,13 +32,20 @@ export async function generateMetadata(
             excerptText = postResGraphQL.excerpt;
         }
 
-
         return {
+
             title: postResGraphQL.title,
             description: excerptText,
             openGraph: {
-                images: [postResGraphQL.featuredImage?.node.sourceUrl]
-            }
+                images: [postResGraphQL.featuredImage?.node.sourceUrl],
+                title: postResGraphQL.title,
+                description: excerptText,
+                url: 'https://www.paulmerupu.com/blog/' + slug,
+                siteName: 'Paul Merupu',
+                locale: 'en_US',
+                type: 'website',
+            },
+
         }
 
     } catch (error) {
