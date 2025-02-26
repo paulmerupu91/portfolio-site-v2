@@ -2,6 +2,11 @@ import Link from 'next/link'
 
 import { getBlogPostsFromApi } from '@/utils/index'
 
+export const metadata = {
+    title: 'Blog',
+    description: 'Blog posts by Paul Merupu'
+}
+
 async function page(  ): Promise<JSX.Element> {
 
     const blogPostsRes = await getBlogPostsFromApi();

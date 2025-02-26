@@ -129,8 +129,8 @@ function Navigation() {
             </div>
 
             <animated.div style={{...stylesFromSpring}}
-                className='bg-div border border-slate-200 dark:border-slate-800
-                    bg-slate-200 dark:bg-slate-950 bg-opacity-40
+                className='bg-div border border-slate-100 dark:border-transparent
+                    bg-slate-100 dark:bg-slate-950 bg-opacity-40
                     z-20 absolute md:m-4 top-0 bottom-0 left-0 right-0 md:rounded-full backdrop-blur-lg'
             >
             </animated.div>

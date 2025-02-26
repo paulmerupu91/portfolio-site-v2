@@ -129,12 +129,12 @@ async function index({ params }: { params: Promise<{ slug: string }> }): Promise
                         {/* Nothing goes here */}
                     </div>
 
-                    <h1 className={`text-3xl md:text-4xl xl:text-5xl font-extralight z-10 relative text-slate-800 dark:text-slate-300`}>
+                    <h1 className={`text-3xl md:text-4xl xl:text-5xl font-extralight z-10 relative text-slate-800 dark:text-slate-100`}>
                         {/* Post Title */}
                         {postResGraphQL && postResGraphQL.title}
                     </h1>
                     {/* Post Date */}
-                    <div className=" inline-flex flex-wrap items-baseline z-10 relative mt-3 text-slate-700 dark:text-slate-400">
+                    <div className=" inline-flex flex-wrap items-baseline z-10 relative mt-3 text-slate-700 dark:text-slate-300">
                         <time className='  block ' dateTime={postResGraphQL.date}>{date}</time>
                         {
                             readingTimeStr &&
