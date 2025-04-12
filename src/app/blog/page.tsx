@@ -36,7 +36,7 @@ async function page(  ): Promise<JSX.Element> {
                     const paddingTopClass = !featuredImage ? 'pt-6' : '';
 
                     return (
-                        <Link key={post.databaseId} href={`/blog/${slug}`} className={`flex flex-col justify-center flex-wrap pb-6 ${paddingTopClass} ${borderClasses} `}>
+                        <Link key={post.databaseId} href={`/blog/${slug}`} className={`flex flex-col flex-wrap pb-6 ${paddingTopClass} ${borderClasses} `}>
                             {/* Post Image */}
                             {/* <img src={post.featured_media_data?.source_url} alt={post.title.rendered} className='w-full h-48 object-cover' /> */}
                             {/* Post Title */}
