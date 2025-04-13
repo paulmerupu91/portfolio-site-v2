@@ -48,6 +48,18 @@ img{
         @apply font-bold;
         @apply px-6;
     }
+
+    h2{
+        @apply text-2xl;
+    }
+
+    h3{
+        @apply text-xl;
+    }
+
+    h4{
+        @apply text-lg;
+    }
 }
 
 // Write different styles for class bg-pattern for dark and light modes
