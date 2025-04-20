@@ -45,7 +45,11 @@ async function page(  ): Promise<JSX.Element> {
                                 featuredImage &&
                                 <div className="top-section mb-6 overflow-hidden">
                                     <div className='hero-img sm:mx-0'>
-                                        <img srcSet={srcSetFI} src={sourceUrlFI} alt={title} className='w-full aspect-3/2 object-cover transition-transform duration-300 ease-out hover:scale-105' />
+                                        <img width="16" height="9" srcSet={srcSetFI} src={sourceUrlFI}
+                                            alt={title}
+                                            className='w-full aspect-3/2 object-cover transition-transform duration-300 ease-out hover:scale-105'
+                                            style={{ aspectRatio: '16/9' }}
+                                        />
                                     </div>
                                 </div>
                             }

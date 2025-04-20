@@ -5,6 +5,8 @@ import { useSpring, animated } from '@react-spring/web'
 
 function NavLogo(): JSX.Element {
 
+    console.log( 'NavLogo' );
+
     const router = useRouter();
 
     const ref = useRef(null);
@@ -45,7 +47,8 @@ const SingleChar = ({ letter, index, hovered = false }: { letter: string, index:
     // Flicker effect using React Spring
     const random = Math.random();
     const delay = random * 300;
-    const opacityEffectVal = 0.3;
+    // const opacityEffectVal = 0.3;
+    const opacityEffectVal = 1;
     
     const [stylesFromSpring, api] = useSpring(
         () => ({

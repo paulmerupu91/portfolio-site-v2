@@ -17,7 +17,7 @@ export async function generateMetadata(
     parent: ResolvingMetadata
 ): Promise<Metadata> {
     // read route params
-    const slug = params.slug
+    const { slug } = await params;
 
     try {
         const resPost = await getBlogPostFromApi({ slug: slug });
@@ -157,7 +157,7 @@ async function index({ params }: { params: Promise<{ slug: string }> }): Promise
                                 src={postResGraphQL?.featuredImage?.node.sourceUrl}
                                 srcSet={postResGraphQL?.featuredImage?.node.srcSet}
                                 alt={postResGraphQL?.featuredImage?.node.altText}
-                                className='w-full object-cover'
+                                className='w-full object-cover aspect-[16/9] '
                             />
                         </div>
                     }
