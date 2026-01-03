@@ -1,0 +1,76 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0;
+    }
+}
+
+body {
+    background-color: #e5e5f7;
+}
+
+img {
+    margin: 1rem 0;
+}
+
+.hero-img img {
+    width: 100%;
+    margin: unset;
+}
+
+.article-body {
+
+    img {
+        @apply w-full;
+    }
+
+    p,
+    ol,
+    ul {
+        @apply px-4;
+        @apply pb-4;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-bold;
+        @apply px-4;
+        @apply mb-6;
+        @apply mt-8;
+    }
+
+    h2 {
+        @apply text-2xl;
+    }
+
+    h3 {
+        @apply text-xl;
+    }
+
+    h4 {
+        @apply text-lg;
+    }
+}
+
+.bg-pattern {
+    opacity: 0.8;
+    background-image: radial-gradient(#0072ab 0.5px, #0b0b1900 0.5px);
+    background-blend-mode: overlay;
+    background-size: 10px 10px;
+
+}
